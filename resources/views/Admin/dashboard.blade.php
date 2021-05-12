@@ -1,446 +1,338 @@
 @extends('layouts.Admin_Layout')
 @section('script')
-    <!-- BEGIN: Page Vendor JS-->
-    <script src={{ url('/app-assets/vendors/js/extensions/dropzone.min.js') }}></script>
-    <script src={{ url('/app-assets/vendors/js/tables/datatable/datatables.min.js') }}></script>
-    <script src={{ url('/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js') }}></script>
-    <script src={{ url('/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js') }}></script>
-    <script src={{ url('/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js') }}></script>
-    <script src={{ url('/app-assets/vendors/js/tables/datatable/dataTables.select.min.js') }}></script>
-    <script src={{ url('/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js') }}></script>
-    <!-- END: Page Vendor JS-->
-    <!-- BEGIN: Page JS-->
-    <script src={{ url('/app-assets/js/scripts/ui/data-list-view.js') }}></script>
-    <!-- END: Page JS-->
+    <!-- Page level plugins -->
+    <script src="{{ url('/assets/vendor/chart.js/Chart.min.js') }}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{ url('/assets/js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ url('/assets/js/demo/chart-pie-demo.js') }}"></script>
 @endsection
 @section('content')
-    <div class="content-body">
-        <!-- Dashboard Ecommerce Starts -->
-        <section id="dashboard-ecommerce">
-            <div class="row">
-                <div class="col-lg-3 col-sm-6 col-12">
-                    <div class="card">
-                        <div class="card-header d-flex flex-column align-items-start pb-0">
-                            <div class="avatar bg-rgba-primary p-50 m-0">
-                                <div class="avatar-content">
-                                    <i class="feather icon-users text-primary font-medium-5"></i>
-                                </div>
-                            </div>
-                            <h2 class="text-bold-700 mt-1">92.6k</h2>
-                            <p class="mb-0">Subscribers Gained</p>
-                        </div>
-                        <div class="card-content">
-                            <div id="line-area-chart-1"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 col-12">
-                    <div class="card">
-                        <div class="card-header d-flex flex-column align-items-start pb-0">
-                            <div class="avatar bg-rgba-success p-50 m-0">
-                                <div class="avatar-content">
-                                    <i class="feather icon-credit-card text-success font-medium-5"></i>
-                                </div>
-                            </div>
-                            <h2 class="text-bold-700 mt-1">97.5k</h2>
-                            <p class="mb-0">Revenue Generated</p>
-                        </div>
-                        <div class="card-content">
-                            <div id="line-area-chart-2"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 col-12">
-                    <div class="card">
-                        <div class="card-header d-flex flex-column align-items-start pb-0">
-                            <div class="avatar bg-rgba-danger p-50 m-0">
-                                <div class="avatar-content">
-                                    <i class="feather icon-shopping-cart text-danger font-medium-5"></i>
-                                </div>
-                            </div>
-                            <h2 class="text-bold-700 mt-1">36%</h2>
-                            <p class="mb-0">Quarterly Sales</p>
-                        </div>
-                        <div class="card-content">
-                            <div id="line-area-chart-3"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 col-12">
-                    <div class="card">
-                        <div class="card-header d-flex flex-column align-items-start pb-0">
-                            <div class="avatar bg-rgba-warning p-50 m-0">
-                                <div class="avatar-content">
-                                    <i class="feather icon-package text-warning font-medium-5"></i>
-                                </div>
-                            </div>
-                            <h2 class="text-bold-700 mt-1">97.5K</h2>
-                            <p class="mb-0">Orders Received</p>
-                        </div>
-                        <div class="card-content">
-                            <div id="line-area-chart-4"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-md-6 col-12">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between align-items-end">
-                            <h4 class="card-title">Revenue</h4>
-                            <p class="font-medium-5 mb-0"><i class="feather icon-settings text-muted cursor-pointer"></i></p>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-body pb-0">
-                                <div class="d-flex justify-content-start">
-                                    <div class="mr-2">
-                                        <p class="mb-50 text-bold-600">This Month</p>
-                                        <h2 class="text-bold-400">
-                                            <sup class="font-medium-1">$</sup>
-                                            <span class="text-success">86,589</span>
-                                        </h2>
-                                    </div>
-                                    <div>
-                                        <p class="mb-50 text-bold-600">Last Month</p>
-                                        <h2 class="text-bold-400">
-                                            <sup class="font-medium-1">$</sup>
-                                            <span>73,683</span>
-                                        </h2>
-                                    </div>
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+        </div>
 
-                                </div>
-                                <div id="revenue-chart"></div>
+        <!-- Content Row -->
+        <div class="row">
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    Earnings (Monthly)</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between align-items-end">
-                            <h4 class="mb-0">Goal Overview</h4>
-                            <p class="font-medium-5 mb-0"><i class="feather icon-help-circle text-muted cursor-pointer"></i></p>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-body px-0 pb-0">
-                                <div id="goal-overview-chart" class="mt-75"></div>
-                                <div class="row text-center mx-0">
-                                    <div class="col-6 border-top border-right d-flex align-items-between flex-column py-1">
-                                        <p class="mb-50">Completed</p>
-                                        <p class="font-large-1 text-bold-700">786,617</p>
-                                    </div>
-                                    <div class="col-6 border-top d-flex align-items-between flex-column py-1">
-                                        <p class="mb-50">In Progress</p>
-                                        <p class="font-large-1 text-bold-700">13,561</p>
-                                    </div>
-                                </div>
+                            <div class="col-auto">
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4 col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Browser Statistics</h4>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    Earnings (Annual)</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            </div>
                         </div>
-                        <div class="card-content">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+                                </div>
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col-auto">
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="progress progress-sm mr-2">
+                                            <div class="progress-bar bg-info" role="progressbar"
+                                                 style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                 aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                    Pending Requests</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-comments fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Row -->
+
+        <div class="row">
+
+            <!-- Area Chart -->
+            <div class="col-xl-8 col-lg-7">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div
+                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                        <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                 aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-header">Dropdown Header:</div>
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="myAreaChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pie Chart -->
+            <div class="col-xl-4 col-lg-5">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div
+                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                        <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                 aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-header">Dropdown Header:</div>
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="chart-pie pt-4 pb-2">
+                            <canvas id="myPieChart"></canvas>
+                        </div>
+                        <div class="mt-4 text-center small">
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-primary"></i> Direct
+                                        </span>
+                            <span class="mr-2">
+                                            <i class="fas fa-circle text-success"></i> Social
+                                        </span>
+                            <span class="mr-2">
+                                            <i class="fas fa-circle text-info"></i> Referral
+                                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Row -->
+        <div class="row">
+
+            <!-- Content Column -->
+            <div class="col-lg-6 mb-4">
+
+                <!-- Project Card Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="small font-weight-bold">Server Migration <span
+                                class="float-right">20%</span></h4>
+                        <div class="progress mb-4">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
+                                 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <h4 class="small font-weight-bold">Sales Tracking <span
+                                class="float-right">40%</span></h4>
+                        <div class="progress mb-4">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
+                                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <h4 class="small font-weight-bold">Customer Database <span
+                                class="float-right">60%</span></h4>
+                        <div class="progress mb-4">
+                            <div class="progress-bar" role="progressbar" style="width: 60%"
+                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <h4 class="small font-weight-bold">Payout Details <span
+                                class="float-right">80%</span></h4>
+                        <div class="progress mb-4">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
+                                 aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <h4 class="small font-weight-bold">Account Setup <span
+                                class="float-right">Complete!</span></h4>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
+                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Color System -->
+                <div class="row">
+                    <div class="col-lg-6 mb-4">
+                        <div class="card bg-primary text-white shadow">
                             <div class="card-body">
-                                <div class="d-flex justify-content-between mb-25">
-                                    <div class="browser-info">
-                                        <p class="mb-25">Google Chrome</p>
-                                        <h4>73%</h4>
-                                    </div>
-                                    <div class="stastics-info text-right">
-                                        <span>800 <i class="feather icon-arrow-up text-success"></i></span>
-                                        <span class="text-muted d-block">13:16</span>
-                                    </div>
-                                </div>
-                                <div class="progress progress-bar-primary mb-2">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="73" aria-valuemin="73" aria-valuemax="100" style="width:73%"></div>
-                                </div>
-                                <div class="d-flex justify-content-between mb-25">
-                                    <div class="browser-info">
-                                        <p class="mb-25">Opera</p>
-                                        <h4>8%</h4>
-                                    </div>
-                                    <div class="stastics-info text-right">
-                                        <span>-200 <i class="feather icon-arrow-down text-danger"></i></span>
-                                        <span class="text-muted d-block">13:16</span>
-                                    </div>
-                                </div>
-                                <div class="progress progress-bar-primary mb-2">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="8" aria-valuemin="8" aria-valuemax="100" style="width:8%"></div>
-                                </div>
-                                <div class="d-flex justify-content-between mb-25">
-                                    <div class="browser-info">
-                                        <p class="mb-25">Firefox</p>
-                                        <h4>19%</h4>
-                                    </div>
-                                    <div class="stastics-info text-right">
-                                        <span>100 <i class="feather icon-arrow-up text-success"></i></span>
-                                        <span class="text-muted d-block">13:16</span>
-                                    </div>
-                                </div>
-                                <div class="progress progress-bar-primary mb-2">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="19" aria-valuemin="19" aria-valuemax="100" style="width:19%"></div>
-                                </div>
-                                <div class="d-flex justify-content-between mb-25">
-                                    <div class="browser-info">
-                                        <p class="mb-25">Internet Explorer</p>
-                                        <h4>27%</h4>
-                                    </div>
-                                    <div class="stastics-info text-right">
-                                        <span>-450 <i class="feather icon-arrow-down text-danger"></i></span>
-                                        <span class="text-muted d-block">13:16</span>
-                                    </div>
-                                </div>
-                                <div class="progress progress-bar-primary mb-50">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="27" aria-valuemin="27" aria-valuemax="100" style="width:27%"></div>
-                                </div>
+                                Primary
+                                <div class="text-white-50 small">#4e73df</div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-8 col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Client Retention</h4>
-                        </div>
-                        <div class="card-content">
+                    <div class="col-lg-6 mb-4">
+                        <div class="card bg-success text-white shadow">
                             <div class="card-body">
-                                <div id="client-retention-chart">
-                                </div>
+                                Success
+                                <div class="text-white-50 small">#1cc88a</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card bg-info text-white shadow">
+                            <div class="card-body">
+                                Info
+                                <div class="text-white-50 small">#36b9cc</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card bg-warning text-white shadow">
+                            <div class="card-body">
+                                Warning
+                                <div class="text-white-50 small">#f6c23e</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card bg-danger text-white shadow">
+                            <div class="card-body">
+                                Danger
+                                <div class="text-white-50 small">#e74a3b</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card bg-secondary text-white shadow">
+                            <div class="card-body">
+                                Secondary
+                                <div class="text-white-50 small">#858796</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card bg-light text-black shadow">
+                            <div class="card-body">
+                                Light
+                                <div class="text-black-50 small">#f8f9fc</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card bg-dark text-white shadow">
+                            <div class="card-body">
+                                Dark
+                                <div class="text-white-50 small">#5a5c69</div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
-            <div class="row">
-                <div class="col-lg-4 col-12">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between align-items-end">
-                            <h4>Sessions By Device</h4>
-                            <div class="dropdown chart-dropdown">
-                                <button class="btn btn-sm border-0 dropdown-toggle px-0" type="button" id="dropdownItem1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Last 7 Days
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownItem1">
-                                    <a class="dropdown-item" href="#">Last 28 Days</a>
-                                    <a class="dropdown-item" href="#">Last Month</a>
-                                    <a class="dropdown-item" href="#">Last Year</a>
-                                </div>
-                            </div>
+
+            <div class="col-lg-6 mb-4">
+
+                <!-- Illustrations -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center">
+                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
+                                 src="{{asset('img/undraw_posting_photo.svg')}}" alt="">
                         </div>
-                        <div class="card-content">
-                            <div class="card-body pt-0">
-                                <div id="session-chart" class="mb-1"></div>
-                                <div class="chart-info d-flex justify-content-between mb-1">
-                                    <div class="series-info d-flex align-items-center">
-                                        <i class="feather icon-monitor font-medium-2 text-primary"></i>
-                                        <span class="text-bold-600 mx-50">Desktop</span>
-                                        <span> - 58.6%</span>
-                                    </div>
-                                    <div class="series-result">
-                                        <span>2%</span>
-                                        <i class="feather icon-arrow-up text-success"></i>
-                                    </div>
-                                </div>
-                                <div class="chart-info d-flex justify-content-between mb-1">
-                                    <div class="series-info d-flex align-items-center">
-                                        <i class="feather icon-tablet font-medium-2 text-warning"></i>
-                                        <span class="text-bold-600 mx-50">Mobile</span>
-                                        <span> - 34.9%</span>
-                                    </div>
-                                    <div class="series-result">
-                                        <span>8%</span>
-                                        <i class="feather icon-arrow-up text-success"></i>
-                                    </div>
-                                </div>
-                                <div class="chart-info d-flex justify-content-between mb-50">
-                                    <div class="series-info d-flex align-items-center">
-                                        <i class="feather icon-tablet font-medium-2 text-danger"></i>
-                                        <span class="text-bold-600 mx-50">Tablet</span>
-                                        <span> - 6.5%</span>
-                                    </div>
-                                    <div class="series-result">
-                                        <span>-5%</span>
-                                        <i class="feather icon-arrow-down text-danger"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <p>Add some quality, svg illustrations to your project courtesy of <a
+                                target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
+                            constantly updated collection of beautiful svg images that you can use
+                            completely free and without attribution!</p>
+                        <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
+                            unDraw &rarr;</a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-12">
-                    <div class="card chat-application">
-                        <div class="card-header">
-                            <h4 class="card-title">Chat</h4>
-                        </div>
-                        <div class="chat-app-window">
-                            <div class="user-chats">
-                                <div class="chats">
-                                    <div class="chat">
-                                        <div class="chat-avatar">
-                                            <a class="avatar m-0" data-toggle="tooltip" href="#" data-placement="right" title="" data-original-title="">
-                                                <img src={{ url('app-assets/images/portrait/small/avatar-s-2.jpg" alt="avatar" height="40" width="40') }} />
-                                            </a>
-                                        </div>
-                                        <div class="chat-body">
-                                            <div class="chat-content">
-                                                <p>Cake sesame snaps cupcake gingerbread</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="chat chat-left">
-                                        <div class="chat-avatar mt-50">
-                                            <a class="avatar m-0" data-toggle="tooltip" href="#" data-placement="left" title="" data-original-title="">
-                                                <img src={{ url('app-assets/images/portrait/small/avatar-s-5.jpg" alt="avatar" height="40" width="40') }} />
-                                            </a>
-                                        </div>
-                                        <div class="chat-body">
-                                            <div class="chat-content">
-                                                <p>Apple pie pie jujubes chupa chups muffin</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="chat">
-                                        <div class="chat-avatar">
-                                            <a class="avatar m-0" data-toggle="tooltip" href="#" data-placement="right" title="" data-original-title="">
-                                                <img src={{ url('app-assets/images/portrait/small/avatar-s-2.jpg" alt="avatar" height="40" width="40') }} />
-                                            </a>
-                                        </div>
-                                        <div class="chat-body">
-                                            <div class="chat-content">
-                                                <p>Chocolate cake</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="chat chat-left">
-                                        <div class="chat-avatar mt-50">
-                                            <a class="avatar m-0" data-toggle="tooltip" href="#" data-placement="left" title="" data-original-title="">
-                                                <img src={{ url('app-assets/images/portrait/small/avatar-s-5.jpg" alt="avatar" height="40" width="40') }} />
-                                            </a>
-                                        </div>
-                                        <div class="chat-body">
-                                            <div class="chat-content">
-                                                <p>Donut sweet pie oat cake dragée fruitcake</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="chat">
-                                        <div class="chat-avatar mt-50">
-                                            <a class="avatar m-0" data-toggle="tooltip" href="#" data-placement="right" title="" data-original-title="">
-                                                <img src={{ url('app-assets/images/portrait/small/avatar-s-2.jpg" alt="avatar" height="40" width="40') }} />
-                                            </a>
-                                        </div>
-                                        <div class="chat-body">
-                                            <div class="chat-content">
-                                                <p>Liquorice chocolate bar jelly beans icing</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="chat chat-left">
-                                        <div class="chat-avatar mt-50">
-                                            <a class="avatar m-0" data-toggle="tooltip" href="#" data-placement="left" title="" data-original-title="">
-                                                <img src={{ url('app-assets/images/portrait/small/avatar-s-5.jpg" alt="avatar" height="40" width="40') }} />
-                                            </a>
-                                        </div>
-                                        <div class="chat-body">
-                                            <div class="chat-content">
-                                                <p>Powder toffee tootsie roll macaroon cupcake.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="chat">
-                                        <div class="chat-avatar">
-                                            <a class="avatar m-0" data-toggle="tooltip" href="#" data-placement="right" title="" data-original-title="">
-                                                <img src={{ url('app-assets/images/portrait/small/avatar-s-2.jpg" alt="avatar" height="40" width="40') }} />
-                                            </a>
-                                        </div>
-                                        <div class="chat-body">
-                                            <div class="chat-content">
-                                                <p>Apple pie oat cake brownie cotton candy cupcake chocolate bar dessert.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="chat chat-left">
-                                        <div class="chat-avatar mt-50">
-                                            <a class="avatar m-0" data-toggle="tooltip" href="#" data-placement="left" title="" data-original-title="">
-                                                <img src={{ url('app-assets/images/portrait/small/avatar-s-5.jpg" alt="avatar" height="40" width="40') }} />
-                                            </a>
-                                        </div>
-                                        <div class="chat-body">
-                                            <div class="chat-content">
-                                                <p>Biscuit cake jujubes carrot cake topping sweet cake.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="chat-footer">
-                                <div class="card-body d-flex justify-content-around pt-0">
-                                    <input type="text" class="form-control mr-50" placeholder="Type your Message">
-                                    <button type="button" class="btn btn-icon btn-primary"><i class="feather icon-navigation"></i></button>
-                                </div>
-                            </div>
-                        </div>
+
+                <!-- Approach -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
+                    </div>
+                    <div class="card-body">
+                        <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
+                            CSS bloat and poor page performance. Custom CSS classes are used to create
+                            custom components and custom utility classes.</p>
+                        <p class="mb-0">Before working with this theme, you should become familiar with the
+                            Bootstrap framework, especially the utility classes.</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-12">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between pb-0">
-                            <h4 class="card-title">Customers</h4>
-                            <div class="dropdown chart-dropdown">
-                                <button class="btn btn-sm border-0 dropdown-toggle px-0" type="button" id="dropdownItem3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Last 7 Days
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownItem3">
-                                    <a class="dropdown-item" href="#">Last 28 Days</a>
-                                    <a class="dropdown-item" href="#">Last Month</a>
-                                    <a class="dropdown-item" href="#">Last Year</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-body py-0">
-                                <div id="customer-chart"></div>
-                            </div>
-                            <ul class="list-group list-group-flush customer-info">
-                                <li class="list-group-item d-flex justify-content-between ">
-                                    <div class="series-info">
-                                        <i class="fa fa-circle font-small-3 text-primary"></i>
-                                        <span class="text-bold-600">New</span>
-                                    </div>
-                                    <div class="product-result">
-                                        <span>890</span>
-                                    </div>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between ">
-                                    <div class="series-info">
-                                        <i class="fa fa-circle font-small-3 text-warning"></i>
-                                        <span class="text-bold-600">Returning</span>
-                                    </div>
-                                    <div class="product-result">
-                                        <span>258</span>
-                                    </div>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between ">
-                                    <div class="series-info">
-                                        <i class="fa fa-circle font-small-3 text-danger"></i>
-                                        <span class="text-bold-600">Referrals</span>
-                                    </div>
-                                    <div class="product-result">
-                                        <span>149</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+
             </div>
-        </section>
-        <!-- Dashboard Ecommerce ends -->
+        </div>
 
     </div>
-@endsection()
+@endsection
